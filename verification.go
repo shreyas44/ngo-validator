@@ -15,9 +15,6 @@ func ScrapeNGOInfo(panId string) (string, error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 
-	opts := []chromedp.ExecAllocatorOption{chromedp.Flag("headless", false)}
-	opts = append(chromedp.DefaultExecAllocatorOptions[:], opts...)
-	ctx, _ = chromedp.NewExecAllocator(ctx, opts...)
 	ctx, _ = chromedp.NewContext(ctx)
 
 	var (
