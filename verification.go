@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"errors"
-	"fmt"
 	"regexp"
 	"strings"
 
@@ -93,7 +92,6 @@ func VerifyNGO(input VerifyInput) error {
 	case !exists:
 		return errors.New("invalid_pan")
 	case cleanName(input.Name) != cleanName(info.Name):
-		fmt.Println(cleanName(input.Name), cleanName(info.Name))
 		return errors.New("invalid_name")
 	case !VerifyAddresses(input.Address, info.Address):
 		return errors.New("invalid_address")
