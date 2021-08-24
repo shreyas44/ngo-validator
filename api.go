@@ -15,7 +15,7 @@ func handleVerify(w http.ResponseWriter, r *http.Request) {
 
 	if !strings.Contains(r.Header.Get("content-type"), "application/json") {
 		response := VerifyResponse{
-			VerificationStatus: "unfulfilled",
+			VerificationStatus: StatusUnfulfilled,
 			Message:            "content type must be JSON",
 		}
 		resp, _ := json.Marshal(response)
@@ -30,7 +30,7 @@ func handleVerify(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil || unmarshallErr != nil {
 		response := VerifyResponse{
-			VerificationStatus: "unfulfilled",
+			VerificationStatus: StatusUnfulfilled,
 			Message:            "invalid_request_body",
 		}
 
@@ -48,10 +48,10 @@ func handleVerify(w http.ResponseWriter, r *http.Request) {
 		}
 
 		if err.Error() == "unexpected_error" {
-			response.VerificationStatus = "unfulfilled"
+			response.VerificationStatus = StatusUnfulfilled
 			w.WriteHeader(http.StatusInternalServerError)
 		} else {
-			response.VerificationStatus = "failed"
+			response.VerificationStatus = StatusFail
 			w.WriteHeader(http.StatusOK)
 		}
 
@@ -61,7 +61,7 @@ func handleVerify(w http.ResponseWriter, r *http.Request) {
 	}
 
 	response := VerifyResponse{
-		VerificationStatus: "success",
+		VerificationStatus: StatusSuccess,
 	}
 
 	w.WriteHeader(http.StatusOK)

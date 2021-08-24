@@ -3,8 +3,9 @@ package main
 type VerificationStatus string
 
 const (
-	StatusSuccess VerificationStatus = "success"
-	StatusFailure VerificationStatus = "fail"
+	StatusFail        VerificationStatus = "fail"
+	StatusSuccess     VerificationStatus = "success"
+	StatusUnfulfilled VerificationStatus = "unfulfilled"
 )
 
 type NGOInfo struct {
